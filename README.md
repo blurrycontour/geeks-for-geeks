@@ -1,1 +1,1 @@
-# geeks-for-geeks
+# GeeksForGeeks Daily
