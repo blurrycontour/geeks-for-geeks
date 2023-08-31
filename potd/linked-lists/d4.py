@@ -1,3 +1,5 @@
+# https://practice.geeksforgeeks.org/problems/delete-nodes-having-greater-value-on-right/1
+
 '''
 class Node:
     def __init__(self,x):

@@ -1,3 +1,5 @@
+# https://practice.geeksforgeeks.org/problems/remove-duplicate-element-from-sorted-linked-list/1
+
 '''
 	Your task is to remove duplicates from given 
 	sorted linked list.

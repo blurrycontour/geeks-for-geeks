@@ -1,3 +1,5 @@
+# https://practice.geeksforgeeks.org/problems/multiply-two-strings/1
+
 class Solution:
     def multiplyStrings(self,s1,s2):
         nums = ()

@@ -1,3 +1,5 @@
+# https://practice.geeksforgeeks.org/problems/make-matrix-beautiful-1587115620/1
+
 class Solution:
     def findMinOpeartion(self, matrix, n):
         row_sums = [0]*n
