@@ -1,8 +1,8 @@
-# https://practice.geeksforgeeks.org/problems/leftmost-and-rightmost-nodes-of-binary-tree/1
+# https://practice.geeksforgeeks.org/problems/leaf-under-budget/1
 
 '''
 class Node:
-    def _init_(self,val):
+    def __init__(self,val):
         self.data=val
         self.left=None
         self.right=None
@@ -10,23 +10,45 @@ class Node:
 
 from collections import deque
 
-def printCorner(root):
-    q = deque()
-    q.append(root)
-    print(q[0].data, end=" ")
-    while len(q) > 0:
-        for _ in range(len(q)):
-            if q[0].left:
-                q.append(q[0].left)
-            if q[0].right:
-                q.append(q[0].right)
-            q.popleft()
+class Solution:
+    def isLeaf(self, node):
+        if node.left is None and node.right is None:
+            return True
+        else:
+            return False
 
-        if len(q) == 1:
-            print(q[0].data, end=" ")
-        elif len(q) > 1:
-            print(q[0].data, q[-1].data, end=" ")
+    def min_cumsum(self, array, threshold):
+        array = sorted(array)
+        budget = 0
+        count = 0
+        for cost in array:
+            budget += cost
+            if budget <= threshold:
+                count += 1
+            else:
+                break
+        return count
 
+    def getCount(self, root, n):
+        leaf_costs = []
+        q = deque()
+        q.append(root)
+
+        level = 1
+        while len(q) > 0:
+            for _ in range(len(q)):
+                if q[0].left:
+                    q.append(q[0].left)
+                if q[0].right:
+                    q.append(q[0].right)
+
+                if self.isLeaf(q[0]):
+                    leaf_costs.append(level)
+                q.popleft()
+
+            level += 1
+
+        return self.min_cumsum(leaf_costs, n)
 
 # Tree Node
 class Node:
@@ -95,12 +117,14 @@ def buildTree(s):
  
 if __name__=="__main__":
     cases = [
-        ('1 2 3 4 5 6 7'), # 1 2 3 4 7
-        ('10 20 30 40 60'), # 10 20 30 40 60
-        ('19 10 8 N 17 9 17 N 9 9 19 N 14 8 10 N 12 4 9 N 19 16 12 N 8 6'), # 19 10 8 17 17 9 14 8 19 16 6
+        ('10 8 2 3 N 3 6 N N N 4', 8), # 2
+        ('1 2 3 4 5 6 7', 5), # 1
+        ('1 2 3 4', 0), # 0
+        ('1', 5), # 1
     ]
     
     for c in cases:
-        root = buildTree(c)
-        printCorner(root)
-        print()
+        s = Solution()
+        root = buildTree(c[0])
+        ans = s.getCount(root, c[1])
+        print(ans)
